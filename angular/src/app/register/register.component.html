@@ -1,0 +1,48 @@
+<div class="formcontainer">
+  <div class="formbody">
+
+<form #empForm='ngForm' (ngSubmit)='empForm.valid && register(empForm)'>
+    <div class="header">Register</div>
+
+  <input type ="text" #name="ngModel" name="name" [(ngModel)]="emplye.name" placeholder="Name"
+  required  [ngClass]="{'invalid-textbox' :empForm.submitted && !name.valid }">
+  <div *ngIf="empForm.submitted && !name.valid">
+    <label class="validation-message">This field is required.</label>
+  </div>
+
+  <!-- <input type ="text"  #role="ngModel" name="role" [(ngModel)]="emplye.role" placeholder="Role"
+  required  [ngClass]="{'invalid-textbox' :empForm.submitted && !role.valid }">
+  <div *ngIf="empForm.submitted && !role.valid">
+    <label class="validation-message">This field is required.</label>
+  </div> -->
+  <input type ="email"  #email="ngModel" name="email" [(ngModel)]="emplye.email"  placeholder="Email"
+  required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :empForm.submitted && !email.valid }">
+  <div *ngIf="empForm.submitted && email.errors ">
+    <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+    <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+    <!-- <label *ngIf="email.errors.error"  class="validation-message">Duplicate email address.</label> -->
+  </div>
+  <div class="alert" *ngIf="serverErrorMessagesDE">
+    {{serverErrorMessagesDE}}
+  </div>
+  <input type ="password"  #password="ngModel" name="password" [(ngModel)]="emplye.password"  placeholder="password"
+  required  [ngClass]="{'invalid-textbox' :empForm.submitted && !password.valid }">
+  <div *ngIf="empForm.submitted && !password.valid">
+    <label class="validation-message">This field is required.</label>
+  </div>
+  <input type ="password"  #confirmpassword="ngModel" name="confirmpassword" [(ngModel)]="emplye.confirmpassword"  placeholder="confirmpassword"
+  required  [ngClass]="{'invalid-textbox' :empForm.submitted && !confirmpassword.valid }">
+  <div *ngIf="empForm.submitted && !confirmpassword.valid">
+    <label class="validation-message">This field is required.</label>
+  </div>
+  <div class="alert" *ngIf="serverErrorMessagesPN">
+    {{serverErrorMessagesPN}}
+  </div>
+
+  <div style="margin-top:20px;">
+      <input type="submit" value="Submit">
+        <button class="form-btn-hollow" (click)="movetologin()">Login</button>
+</div>
+</form>
+</div>
+</div>

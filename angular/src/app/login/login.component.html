@@ -1,0 +1,41 @@
+<div class="formcontainer">
+  <div class="formbody">
+
+
+<form #empForm='ngForm' (ngSubmit)='empForm.valid && login(empForm)'>
+    <div class="header">Login</div>
+ 
+  
+
+  <input type ="email"#email="ngModel"  name="email" [(ngModel)]="emplye.email"  placeholder="Email"
+  required [pattern]="emailRegex" [ngClass]="{'invalid-textbox' :empForm.submitted && !email.valid }">
+<div *ngIf="empForm.submitted && email.errors ">
+  <label *ngIf="email.errors.required" class="validation-message">This field is required.</label>
+  <label *ngIf="email.errors.pattern" class="validation-message">Invalid email address.</label>
+  <!-- <label *ngIf="serverErrorMessagesEmail" class="validation-message">{{serverErrorMessagesEmail}}</label> -->
+
+
+  </div>
+<div class="alert" *ngIf="serverErrorMessagesEmail">
+  {{serverErrorMessagesEmail}}
+</div>
+  <input type ="password" #password="ngModel"  name="password" [(ngModel)]="emplye.password"  placeholder="password"
+  required  [ngClass]="{'invalid-textbox' :empForm.submitted && !password.valid }">
+  <div *ngIf="empForm.submitted && !password.valid">
+    <label class="validation-message">This field is required.</label>
+  </div>
+  <div class="alert" *ngIf="serverErrorMessagesPassword"  >
+    {{serverErrorMessagesPassword}}
+  </div>
+
+
+  <div style="margin-top:20px;">
+      <input type="submit" value="Submit">
+  
+        <button class="form-btn-hollow" (click)="movetoregister()">Register</button>
+</div>
+</form>
+
+</div>
+</div>
+
